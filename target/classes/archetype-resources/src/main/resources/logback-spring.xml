@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+    <property name="LOG_PATH" value="/var/log"/>
+    <property name="LOG_FILE_NAME" value="servicename_log"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{dd-MM-yyyy|HH:mm:ss.SSS} ${HOSTNAME} %cyan([%thread]) %highlight(%-5level) %logger.%M - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="SAVE-TO-FILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{dd-MM-yyyy|HH:mm:ss.SSS} ${HOSTNAME} %cyan([%thread]) %highlight(%-5level) %logger.%M - %msg%n
+            </Pattern>
+        </encoder>
+
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>
+                ${LOG_PATH}/archived/${LOG_FILE_NAME}_%d{dd-MM-yyyy}.log
+            </fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+
+
+    </appender>
+
+    <springProfile name="dev">
+        <root level="OFF">
+            <appender-ref ref="STDOUT"/>
+            <!--<appender-ref ref="SAVE-TO-FILE"/>-->
+        </root>
+        <logger name="com.springboot.basepackagename" additivity="false" level="debug">
+            <appender-ref ref="STDOUT"/>
+            <!--<appender-ref ref="SAVE-TO-FILE"/>-->
+        </logger>
+
+        <logger name="org.springframework.boot.SpringApplication" level="debug">
+            <appender-ref ref="STDOUT" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="uat">
+        <root level="OFF">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="SAVE-TO-FILE"/>
+        </root>
+        <logger name="com.springboot.basepackagename" additivity="false" level="debug">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="SAVE-TO-FILE"/>
+        </logger>
+
+        <logger name="org.springframework.boot.SpringApplication" level="debug">
+            <appender-ref ref="STDOUT" />
+        </logger>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="OFF">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="SAVE-TO-FILE"/>
+        </root>
+        <logger name="com.springboot.basepackagename" additivity="false" level="debug">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="SAVE-TO-FILE"/>
+        </logger>
+
+        <logger name="org.springframework.boot.SpringApplication" level="debug">
+            <appender-ref ref="STDOUT" />
+        </logger>
+    </springProfile>
+</configuration>

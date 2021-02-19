@@ -1,0 +1,26 @@
+    <archetype xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype/1.0.0 http://maven.apache.org/xsd/archetype-1.0.0.xsd">
+      <id>projectgenerator</id>
+      <sources>
+        <source>src/main/java/SampleApplication.java</source>
+        <source>src/main/java/controllers/SampleApplicationController.java</source>
+        <source>src/main/java/config/SampleApplicationConfig.java</source>
+        <source>src/main/java/filters/SampleFilter.java</source>
+        <source>src/main/java/exception/SampleException.java</source>
+        <source>src/main/java/service/SampleService.java</source>
+        <source>src/main/java/utils/SampleUtils.java</source>
+        <source>src/main/java/models/SampleModel.java</source>
+        <source>src/main/java/responses/SampleResponse.java</source>
+        <source>src/main/java/requests/SampleRequest.java</source>
+        <source>src/main/java/repositories/SampleRepository.java</source>
+      </sources>
+      <testSources>
+        <source>src/test/java/SampleApplicationTest.java</source>
+      </testSources>
+      <resources>
+        <resource>src/main/resources/application.properties</resource>
+        <resource>src/main/resources/application-uat.properties</resource>
+        <resource>src/main/resources/application-prod.properties</resource>
+      </resources>
+    
+    </archetype>
